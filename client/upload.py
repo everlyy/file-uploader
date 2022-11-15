@@ -77,7 +77,7 @@ if __name__ == "__main__":
 	parser = argparse.ArgumentParser()
 	parser.add_argument("file", help="The file to upload.")
 	parser.add_argument("-g", "--gui-mode", help="Uses GUI notifications to tell you what's happening", action="store_true", dest="gui_mode")
-	parser.add_argument("-c", "--no-clipboard", help="Don't put resulting link in clipboard", action="store_true", dest="no_clipboard")
+	parser.add_argument("-c", "--clipboard", help="Put resulting link in clipboard", action="store_true", dest="clipboard")
 	args = parser.parse_args()
 
 	gui_mode = args.gui_mode
@@ -85,5 +85,5 @@ if __name__ == "__main__":
 	config = get_config()
 	success, message = upload(config.host_url, args.file, config.upload_key)
 	notify(f"{'File Uploaded!' if success else 'Unable to upload file:'}\n{message}")
-	if success and not args.no_clipboard:
+	if success and args.clipboard:
 		put_clipboard(message)

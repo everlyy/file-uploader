@@ -8,4 +8,4 @@ Encoding=UTF-8
 [Desktop Action upload]
 Name=Upload to Host
 Icon=None
-Exec=/usr/bin/upload-file --gui-mode "%f"
+Exec=/usr/bin/upload-file --gui-mode --clipboard "%f"
