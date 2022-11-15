@@ -1,0 +1,4 @@
+__pycache__/
+server/files/
+config.py
+config.php

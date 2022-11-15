@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+MimeType=all/allfiles;
+Actions=upload;
+Encoding=UTF-8
+
+[Desktop Action upload]
+Name=Upload to Host
+Icon=None
+Exec=/usr/bin/python3 /home/everly/Documents/code/src/file-uploader/client/upload.py "%f"
