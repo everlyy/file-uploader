@@ -1,8 +1,8 @@
 # File Uploader
 
 Small tool to upload files to a file hosting server. \
-Currently only *properly* works on KDE Plasma, because things such as setting the clipboard and notifying are done through commands. \
-The uploading works fine on other platforms, but you'll have to edit the code to set the clipboard and notify you.
+Currently only *properly* works on KDE Plasma, because setting the clipboard is done through a KDE Plasma service. \
+If you want to make it work on different distributions, edit the upload file to set the clipboard correctly.
 
 # How to Use
 
