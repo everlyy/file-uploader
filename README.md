@@ -9,7 +9,7 @@ If you want to make it work on different distributions, edit the upload file to 
 You can use the `install.sh` script to install automatically, or do it yourself with the steps below.
 
  * Copy `server/config.def.php` to `server/config.php` and edit it for your needs.
- * Copy `client.config.def.py` to `client.config.py` and edit it for your needs.
+ * Copy `client/config.def.py` to `client/config.py` and edit it for your needs.
  * Now upload `server/upload.php` and `config.php` to your host.
 
 ### The following is only if you're using KDE Plasma
