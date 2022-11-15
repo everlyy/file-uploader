@@ -8,4 +8,4 @@ Encoding=UTF-8
 [Desktop Action upload]
 Name=Upload to Host
 Icon=None
-Exec=/usr/bin/python3 /home/everly/Documents/code/src/file-uploader/client/upload.py "%f"
+Exec=/usr/bin/upload-file "%f"
