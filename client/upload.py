@@ -4,11 +4,14 @@ import configparser
 import os
 import requests
 import sys
+import argparse
 
 CONFIGPATH = os.path.expanduser("~/.config/file-uploader")
 CONFIGFILE = f"{CONFIGPATH}/config.ini"
 DEFAULTHOST = "https://your.website.com/upload.php"
 DEFAULTKEY = "UploadKey123"
+
+gui_mode = False
 
 class Config:
 	def __init__(self, host_url, upload_key):
@@ -42,7 +45,6 @@ def get_config():
 
 	if config["settings"]["UploadKey"] == DEFAULTKEY:
 		message = f"You are currently using the defauly upload key. Please set one in '{CONFIGFILE}'"
-		print(message)
 		notify(message)
 
 	return Config(config["settings"]["HostUrl"], config["settings"]["UploadKey"])
@@ -61,20 +63,27 @@ def upload(host_url, filename, upload_key):
 		return False, response.json()["error"]
 
 def notify(message):
-	command = f"notify-send -a \"File Uploader\" \"{message}\""
-	os.system(command)
+	if gui_mode:
+		command = f"notify-send -a \"File Uploader\" \"{message}\""
+		os.system(command)
+	else:
+		print(message)
 
 def put_clipboard(content):
 	command = f"qdbus org.kde.klipper /klipper setClipboardContents \"{content}\""
 	os.system(command)
 
 if __name__ == "__main__":
-	if len(sys.argv) != 2:
-		print(f"No file specified.")
-		sys.exit(1)
+	parser = argparse.ArgumentParser()
+	parser.add_argument("file", help="The file to upload.")
+	parser.add_argument("-g", "--gui-mode", help="Uses GUI notifications to tell you what's happening", action="store_true", dest="gui_mode")
+	parser.add_argument("-c", "--no-clipboard", help="Don't put resulting link in clipboard", action="store_true", dest="no_clipboard")
+	args = parser.parse_args()
+
+	gui_mode = args.gui_mode
 
 	config = get_config()
-	success, message = upload(config.host_url, sys.argv[1], config.upload_key)
+	success, message = upload(config.host_url, args.file, config.upload_key)
 	notify(f"{'File Uploaded!' if success else 'Unable to upload file:'}\n{message}")
-	if success:
+	if success and not args.no_clipboard:
 		put_clipboard(message)
