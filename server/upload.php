@@ -17,10 +17,9 @@ if(!file_exists($target_dir)) {
 	mkdir($target_dir, 0777);
 }
 
-$temp_name = tempnam($target_dir, '');
+$temp_name = tempnam($target_dir, "");
 $target_file =  $temp_name . "." . pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);;
 unlink($temp_name);
-$upload_status = 0;
 
 if($_FILES["file"]["size"] > $max_file_size) {
 	error(413, "File too large.");
